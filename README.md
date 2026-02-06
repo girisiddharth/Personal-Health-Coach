@@ -1,4 +1,4 @@
-# Antigravity Health AI
+
 
 A next-generation health monitoring agent with personalized recommendations, powered by Gemini and ScaleDown technology.
 
@@ -23,3 +23,4 @@ To use the **AI Health Coach**:
 - Vanilla HTML5/CSS3 (Glassmorphism Design)
 - Modern JavaScript (ES6+)
 - Google Gemini API (REST Integration)
+
