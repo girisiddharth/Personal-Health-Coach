@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antigravity Health AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Onboarding Modal -->
+    <div id="onboarding-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 style="margin-bottom: 1rem;">Welcome to Pulse AI</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">Let's customize your health plan. Please enter
+                your details.</p>
+
+            <form id="onboarding-form">
+                <div class="form-group">
+                    <label>Height (cm)</label>
+                    <input type="number" id="input-height" required placeholder="e.g. 175">
+                </div>
+                <div class="form-group">
+                    <label>Current Weight (kg)</label>
+                    <input type="number" id="input-weight" required placeholder="e.g. 70">
+                </div>
+                <div class="form-group">
+                    <label>Daily Work Capacity</label>
+                    <select id="input-activity-level">
+                        <option value="sedentary">Sedentary (Office Job)</option>
+                        <option value="light">Light Activity (Some walking)</option>
+                        <option value="moderate">Moderate (Workout 3-4x/week)</option>
+                        <option value="active">Active (Daily intense exercise)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Time Commitment (per day)</label>
+                    <input type="text" id="input-time" placeholder="e.g. 45 mins">
+                </div>
+                <button type="submit" class="btn w-full" style="width: 100%; justify-content: center;">Start My
+                    Transformation</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Daily Log Modal -->
+    <div id="log-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 style="margin-bottom: 1rem;">Daily Check-in</h2>
+            <form id="daily-log-form">
+                <div class="form-group">
+                    <label>Steps Walked Today</label>
+                    <input type="number" id="log-steps" required placeholder="e.g 8000">
+                </div>
+                <div class="form-group">
+                    <label>Active Minutes (Exercise)</label>
+                    <input type="number" id="log-mins" required placeholder="e.g. 30">
+                </div>
+                <div class="form-group">
+                    <label>What did you eat today? (Briefly)</label>
+                    <textarea id="log-food" rows="3" placeholder="Breakfast: Oatmeal..."></textarea>
+                </div>
+                <button type="submit" class="btn w-full" style="width: 100%; justify-content: center;">Submit & Get AI
+                    Analysis</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-heart-pulse"></i>
+                <span>Pulse AI</span>
+            </div>
+
+            <ul class="nav-links">
+                <li class="nav-item active" onclick="switchTab('dashboard')">
+                    <i class="fa-solid fa-chart-pie"></i> Dashboard
+                </li>
+                <li class="nav-item" onclick="switchTab('profile')">
+                    <i class="fa-solid fa-user"></i> Transformation
+                </li>
+                <li class="nav-item" onclick="switchTab('coach')">
+                    <i class="fa-solid fa-robot"></i> AI Coach
+                </li>
+                <li class="nav-item" onclick="switchTab('integrations')">
+                    <i class="fa-solid fa-gear"></i> Settings
+                </li>
+            </ul>
+
+            <div style="margin-top: auto;">
+                <button class="btn btn-secondary w-full" style="width: 100%; justify-content: center;"
+                    onclick="showLogModal()">
+                    <i class="fa-solid fa-calendar-check"></i> Daily Check-in
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="card-header">
+                <div>
+                    <h2 id="page-title">Health Overview</h2>
+                    <p class="text-secondary" id="current-date">Today's Summary</p>
+                </div>
+            </header>
+
+            <!-- Dashboard View -->
+            <section id="dashboard" class="section active">
+                <div class="stats-grid">
+                    <div class="card">
+                        <div class="stat-label">Weight Goal</div>
+                        <div class="stat-value" id="disp-weight">-- kg</div>
+                        <div class="stat-label" id="disp-weight-diff">Starting...</div>
+                    </div>
+                    <div class="card">
+                        <div class="stat-label">Steps Today</div>
+                        <div class="stat-value" id="disp-steps">0</div>
+                    </div>
+                    <div class="card">
+                        <div class="stat-label">Est. Calories Burned</div>
+                        <div class="stat-value" id="disp-cal text-danger">0</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Today's Schedule (AI Generated)</h3>
+                    <div id="ai-schedule" style="margin-top: 1rem; color: var(--text-secondary);">
+                        Complete your Daily Check-in to generate today's schedule.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile View -->
+            <section id="profile" class="section">
+                <div class="card">
+                    <h2>Your Transformation Journey</h2>
+                    <div style="display: flex; gap: 2rem; margin: 2rem 0;">
+                        <div>
+                            <div class="text-secondary">Start Weight</div>
+                            <div class="stat-value" id="profile-start-weight">--</div>
+                        </div>
+                        <div>
+                            <div class="text-secondary">Current Weight</div>
+                            <div class="stat-value" id="profile-curr-weight">--</div>
+                        </div>
+                        <div>
+                            <div class="text-secondary">Total Loss</div>
+                            <div class="stat-value text-success" id="profile-loss">--</div>
+                        </div>
+                    </div>
+
+                    <h3>History</h3>
+                    <div id="history-list" style="margin-top: 1rem;">
+                        <!-- Logs here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Coach View -->
+            <section id="coach" class="section">
+                <div class="card chat-container">
+                    <div class="card-header"
+                        style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 0;">
+                        <div>
+                            <h3>Gemini Health Coach</h3>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary);">Personalized to your profile</p>
+                        </div>
+                        <div class="connect-badge connected">Online</div>
+                    </div>
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message ai">
+                            Hello! I am ready to help you reach your goals. I have your profile details.
+                            <br><br>
+                            Make sure to submit your <b>Daily Check-in</b> so I can plan your meals and sleep schedule
+                            for today!
+                        </div>
+                    </div>
+                    <form class="chat-input-area" id="chat-form">
+                        <input type="text" id="user-input" placeholder="Ask about diet, exercise, or sleep..."
+                            autocomplete="off">
+                        <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Integrations View -->
+            <section id="integrations" class="section">
+                <div class="card">
+                    <h3>Settings</h3>
+                    <p>API Key Configured: <span class="text-success">Yes (Default)</span></p>
+                    <button class="btn btn-secondary" onclick="localStorage.clear(); location.reload();">Reset Profile
+                        Data</button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="js/gemini.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
