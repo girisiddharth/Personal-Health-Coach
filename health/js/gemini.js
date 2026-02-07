@@ -1,6 +1,6 @@
 class GeminiService {
     constructor() {
-        this.apiKey = localStorage.getItem('gemini_api_key') || 'AIzaSyCaaL20tcvUtasUE8J-9Y3JzxCjykAqweM'; // User provided key as default
+        this.apiKey = localStorage.getItem('gemini_api_key') || 'provide api key here'; //user have to write api key here inside ' ' 
         this.model = 'gemini-1.5-flash';
         this.baseUrl = 'https://generativelanguage.googleapis.com/v1beta/models';
         this.validModelFound = null; // Cache the valid model
@@ -109,3 +109,4 @@ class GeminiService {
 }
 
 window.geminiService = new GeminiService();
+
