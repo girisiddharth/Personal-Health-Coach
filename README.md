@@ -22,5 +22,6 @@ To use the **AI Health Coach**:
 ## Technologies
 - Vanilla HTML5/CSS3 (Glassmorphism Design)
 - Modern JavaScript (ES6+)
-- Google Gemini API (REST Integration)
+- Google Gemini API (REST Integration) 
+
 
