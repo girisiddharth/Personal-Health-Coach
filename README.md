@@ -18,10 +18,13 @@ To use the **AI Health Coach**:
 2. Go to the **Integrations** tab in the app.
 3. Paste your API Key and click **Save**.
 4. Navigate to **AI Coach** and start chatting!
+5. put api key in 3rd line in gemini.js
+6. put api kei in 8th line in main.js
 
 ## Technologies
 - Vanilla HTML5/CSS3 (Glassmorphism Design)
 - Modern JavaScript (ES6+)
 - Google Gemini API (REST Integration) 
+
 
 
