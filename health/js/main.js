@@ -5,7 +5,7 @@ const logs = JSON.parse(localStorage.getItem('daily_logs')) || [];
 // --- Config ---
 // Auto-set the key if missing, so user doesn't have to type it.
 if (!localStorage.getItem('gemini_api_key')) {
-    window.geminiService.setApiKey('AIzaSyCaaL20tcvUtasUE8J-9Y3JzxCjykAqweM');
+    window.geminiService.setApiKey('put api key here'); //api key here too
 }
 
 // --- Initialization ---
@@ -246,3 +246,4 @@ document.getElementById('chat-form').addEventListener('submit', async (e) => {
     loadingDiv.remove();
     appendMessage(response, 'ai');
 });
+
